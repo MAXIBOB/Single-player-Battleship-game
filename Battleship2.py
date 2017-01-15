@@ -9,16 +9,16 @@ def print_board(board):
 if level.isalpha():
     print "That is not a valid input"
 elif int(level)==2:
-    board.append([" ","","1","2","3","4","5"])
+    board.append([" "," ","1","2","3","4","5"])
     board.append([" ","-----------"])
     for x in range(5):
-        board.append([str(x+1)+"|","O","O","O","O","O"])
+        board.append([str(x+1),"|","O","O","O","O","O"])
 
     def random_row(board):
-        return randint(0, len(board) - 1)
+        return randint(0, len(board) )
 
     def random_col(board):
-        return randint(0, len(board[0]) - 1)
+        return randint(0, len(board[0]) )
 
     ship_row = random_row(board)
     ship_col = random_col(board)
@@ -27,21 +27,22 @@ elif int(level)==2:
         print_board(board)
         guess_row = raw_input("Guess Row:")
         guess_col = raw_input("Guess Col:")
+        
 
-        if guess_row.isalpha() or guess_col.isalpha():
+        if guess_col.isalpha() or guess_row.isalpha():
             print "That's not a location, you lose 1 turn."
-        elif int(guess_row)-1 == ship_row and int(guess_col)-1 == ship_col:
+        elif int(guess_row)+1 == ship_row and int(guess_col)+1 == ship_col:
             print "Congratulations! You sunk my battleship in "+str(turn+1)+" turns!"
             break
         else:
-            if (int(guess_row)-1 < 0 or int(guess_row)-1 > 4) or (int(guess_col)-1 < 0 or int(guess_col)-1 > 4):
+            if (int(guess_row)+1 < 2 or int(guess_row)+1 > 6) or (int(guess_col)+1 < 2 or int(guess_col)+1 > 6):
                 print "Oops, that's not even in the ocean."
-            elif(board[int(guess_row)-1][int(guess_col)-1] == "X"):
+            elif(board[int(guess_row)+1][int(guess_col)+1] == "X"):
                 print "You guessed that one already."
                 turn+=1
             else:
                 print "You missed my battleship!"
-                board[int(guess_row)-1][int(guess_col)-1] = "X"
+                board[int(guess_row)+1][int(guess_col)+1] = "X"
             if turn==3:
                 board[ship_row][ship_col]="S"
                 print "Game Over"
@@ -53,10 +54,10 @@ elif int(level)==1:
     for x in range(3):
         board.append([str(x+1)+"|","O","O","O"])
     def random_row(board):
-        return randint(0, len(board) - 1)
+        return randint(0, len(board) +1)
 
     def random_col(board):
-        return randint(0, len(board[0]) - 1)
+        return randint(0, len(board[0]))
 
     ship_row = random_row(board)
     ship_col = random_col(board)
@@ -68,18 +69,18 @@ elif int(level)==1:
 
         if guess_row.isalpha() or guess_col.isalpha():
             print "That's not a location, you lose 1 turn."
-        elif int(guess_row)-1 == ship_row and int(guess_col)-1 == ship_col:
+        elif int(guess_row)+1 == ship_row and int(guess_col) == ship_col:
             print "Congratulations! You sunk my battleship in "+str(turn+1)+" turns!"
             break
         else:
-            if (int(guess_row)-1 < 0 or int(guess_row)-1 > 3) or (int(guess_col)-1 < 0 or int(guess_col)-1 > 3):
+            if (int(guess_row)+1 < 2 or int(guess_row)+1 > 5) or (int(guess_col) < 1 or int(guess_col) > 4):
                 print "Oops, that's not even in the ocean."
-            elif(board[int(guess_row)-1][int(guess_col)-1] == "X"):
+            elif(board[int(guess_row)+1][int(guess_col)] == "X"):
                 print "You guessed that one already."
                 turn+=1
             else:
                 print "You missed my battleship!"
-                board[int(guess_row)-1][int(guess_col)-1] = "X"
+                board[int(guess_row)+1][int(guess_col)] = "X"
             if turn==4:
                 board[ship_row][ship_col]="S"
                 print "Game Over"
@@ -92,10 +93,10 @@ elif int(level)==3:
         board.append([str(x+1)+"|","O","O","O","O","O","O","O"])
 
     def random_row(board):
-        return randint(0, len(board) - 1)
+        return randint(0, len(board))
 
     def random_col(board):
-        return randint(0, len(board[0]) - 1)
+        return randint(0, len(board[0])+1)
 
     ship_row = random_row(board)
     ship_col = random_col(board)
@@ -107,28 +108,32 @@ elif int(level)==3:
 
         if guess_row.isalpha() or guess_col.isalpha():
             print "That's not a location, you lose 1 turn."
-        elif int(guess_row)-1 == ship_row and int(guess_col)-1 == ship_col:
+        elif int(guess_row)+1 == ship_row and int(guess_col) == ship_col:
             print "Congratulations! You sunk my battleship in "+str(turn+1)+" turns!"
             break
         else:
-            if (int(guess_row)-1 < 0 or int(guess_row)-1 > 7) or (int(guess_col)-1 < 0 or int(guess_col)-1 > 7):
+            if (int(guess_row)+1 < 2 or int(guess_row)+1 > 9) or (int(guess_col) < 1 or int(guess_col) > 8):
                 print "Oops, that's not even in the ocean."
-            elif(board[int(guess_row)-1][int(guess_col)-1] == "X"):
+            elif(board[int(guess_row)+1][int(guess_col)] == "X"):
                 print "You guessed that one already."
                 turn+=1
             else:
                 print "You missed my battleship!"
-                board[int(guess_row)-1][int(guess_col)-1] = "X"
+                board[int(guess_row)+1][int(guess_col)] = "X"
+            if turn==4:
+                board[ship_row][ship_col]="S"
+                print_board(board)
+                break
 elif int(level)==4:
     board.append([" ","","1","2","3","4","5","6","7"])
     board.append([" ","--------------"])
     for x in range(7):
         board.append([str(x+1)+"|","O","O","O","O","O","O","O"])
     def random_row(board):
-        return randint(0, len(board) - 1)
+        return randint(0, len(board))
 
     def random_col(board):
-        return randint(0, len(board[0]) - 1)
+        return randint(0, len(board[0])+2)
 
     ship_row = random_row(board)
     ship_col = random_col(board)
@@ -137,20 +142,22 @@ elif int(level)==4:
         print_board(board)
         guess_row = raw_input("Guess Row:")
         guess_col = raw_input("Guess Col:")
+        board[ship_row][ship_col]="S"
+        
 
         if guess_row.isalpha() or guess_col.isalpha():
             print "That's not a location!"
-        elif int(guess_row)-1 == ship_row and int(guess_col)-1 == ship_col:
+        elif int(guess_row)+1 == ship_row and int(guess_col) == ship_col:
             print "Congratulations! You sunk my battleship in "+str(turn+1)+" turns!"
             break
         else:
-            if (int(guess_row)-1 < 0 or int(guess_row)-1 > 7) or (int(guess_col)-1 < 0 or int(guess_col)-1 > 7):
+            if (int(guess_row)+1 < 2 or int(guess_row)+1 > 9) or (int(guess_col) < 1 or int(guess_col) > 8):
                 print "Oops, that's not even in the ocean."
-            elif(board[int(guess_row)-1][int(guess_col)-1] == "X"):
+            elif(board[int(guess_row)+1][int(guess_col)] == "X"):
                 print "You guessed that one already."
                 turn+=1
             else:
                 print "You missed my battleship!"
-                board[int(guess_row)-1][int(guess_col)-1] = "X"
+                board[int(guess_row)+1][int(guess_col)] = "X"
 else:
     print "That is not a valid input."
